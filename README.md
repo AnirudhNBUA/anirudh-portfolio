@@ -1,6 +1,8 @@
 # Anirudh Portfolio
 
 A modern, modular React portfolio showcasing experience, skills, projects, and contact information.
+[Live Demo](https://anirudh-porfolio.netlify.app/)
+
 
 ## Features
 - Modular React components for each section
@@ -50,6 +52,3 @@ public/
 ## Deployment
 - Ready for deployment on Netlify, Vercel, or any static hosting.
 - Includes `netlify.toml` for Netlify configuration.
-
-## License
-MIT
