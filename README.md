@@ -1,7 +1,8 @@
 # Anirudh Portfolio
 
 A modern, modular React portfolio showcasing experience, skills, projects, and contact information.
-[Live Demo](https://anirudh-porfolio.netlify.app/)
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-blue)](https://anirudh-porfolio.netlify.app/)
 
 
 ## Features
