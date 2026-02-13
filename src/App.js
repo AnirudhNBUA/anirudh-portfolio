@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import ScrollProgress from './components/ScrollProgress';
 import SpaceCanvas from './components/SpaceCanvas';
+import CursorGlow from './components/CursorGlow';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
 import Experience from './components/Experience';
@@ -24,6 +25,12 @@ export default function App() {
             radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.05), transparent 25%);
           background-attachment: fixed;
           overflow-x: hidden;
+        }
+
+        /* Selection */
+        ::selection {
+          background: rgba(56, 189, 248, 0.3);
+          color: #fff;
         }
 
         /* Premium Glassmorphism */
@@ -55,6 +62,7 @@ export default function App() {
           background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         /* Timeline */
@@ -78,6 +86,35 @@ export default function App() {
           100% { transform: translateY(0px); }
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* Orb animations for Hero */
+        @keyframes orb1 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(80px, -60px) scale(1.1); }
+          50% { transform: translate(-40px, 50px) scale(0.95); }
+          75% { transform: translate(50px, 30px) scale(1.05); }
+        }
+        @keyframes orb2 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          25% { transform: translate(-60px, 40px) scale(0.95); }
+          50% { transform: translate(70px, -30px) scale(1.1); }
+          75% { transform: translate(-30px, -50px) scale(1.05); }
+        }
+        @keyframes orb3 {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(40px, 60px) scale(1.08); }
+          66% { transform: translate(-50px, -40px) scale(0.92); }
+        }
+        .animate-orb-1 { animation: orb1 20s ease-in-out infinite; }
+        .animate-orb-2 { animation: orb2 25s ease-in-out infinite; }
+        .animate-orb-3 { animation: orb3 18s ease-in-out infinite; }
+
+        /* Blink cursor for typing effect */
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        .animate-blink { animation: blink 1s step-end infinite; }
 
         /* Typing dots */
         .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
@@ -117,9 +154,56 @@ export default function App() {
           background: linear-gradient(to right, #38bdf8, #a855f7);
           border-radius: 2px;
         }
+
+        /* Spotlight card for Projects */
+        .spotlight-card {
+          position: relative;
+          overflow: hidden;
+        }
+        .spotlight-card::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(
+            600px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+            rgba(56, 189, 248, 0.06),
+            transparent 40%
+          );
+          opacity: 0;
+          transition: opacity 0.4s;
+          pointer-events: none;
+          z-index: 1;
+        }
+        .spotlight-card:hover::before {
+          opacity: 1;
+        }
+
+        /* Marquee for Skills */
+        .marquee-container {
+          overflow: hidden;
+          width: 100%;
+        }
+        .marquee-track {
+          display: flex;
+          width: max-content;
+          animation: marquee 40s linear infinite;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .marquee-container:hover .marquee-track {
+          animation-play-state: paused;
+        }
+
+        /* Smooth section scroll offset */
+        section[id] {
+          scroll-margin-top: 5rem;
+        }
       `}</style>
       <div className="font-sans leading-normal tracking-tight text-white relative">
         <SpaceCanvas />
+        <CursorGlow />
         <ScrollProgress />
         <Header />
         <main>

@@ -1,5 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Briefcase, ChevronRight } from 'lucide-react';
 
 const experienceData = [
   {
@@ -7,11 +8,7 @@ const experienceData = [
     company: 'Morgan Stanley',
     period: 'Oct 2025 - Present',
     color: 'sky',
-    icon: (
-      <svg className="w-7 h-7 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-      </svg>
-    ),
+    current: true,
     description:
       'Spearheading backend development for the ESGODS project within Investment Management (IM). My focus is on ensuring data integrity and velocity for critical financial decision-making.',
     bullets: [
@@ -26,11 +23,7 @@ const experienceData = [
     company: 'Accenture',
     period: 'Jun 2025 - Oct 2025',
     color: 'purple',
-    icon: (
-      <svg className="w-8 h-8 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 18l6-6-6-6" />
-      </svg>
-    ),
+    current: false,
     description:
       'Led the R&D and deployment of autonomous agent networks. My primary responsibility was bridging the gap between theoretical AI models and production-ready enterprise systems.',
     bullets: [
@@ -45,11 +38,7 @@ const experienceData = [
     company: 'Accenture',
     period: 'Aug 2023 - Jun 2025',
     color: 'purple',
-    icon: (
-      <svg className="w-8 h-8 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 18l6-6-6-6" />
-      </svg>
-    ),
+    current: false,
     description:
       'Focused on accelerating the Software Development Life Cycle (SDLC) through intelligent automation and Generative AI solutions.',
     bullets: [
@@ -63,86 +52,133 @@ const experienceData = [
 
 const colorStyles = {
   sky: {
-    border: 'border-sky-500/30',
-    hoverBorder: 'group-hover:border-sky-500',
-    shadow: 'shadow-[0_0_20px_rgba(14,165,233,0.2)]',
+    node: 'border-sky-500/40 shadow-[0_0_25px_rgba(14,165,233,0.25)]',
+    nodeIcon: 'text-sky-400',
     dot: 'bg-sky-500 shadow-[0_0_8px_#0ea5e9]',
-    tag: 'bg-sky-500/10 text-sky-300 border-sky-500/20',
+    tag: 'bg-sky-500/10 text-sky-300 border-sky-500/20 hover:bg-sky-500/20',
     title: 'text-sky-400',
+    glow: 'hover:shadow-[0_0_40px_rgba(14,165,233,0.12)]',
+    border: 'hover:border-sky-500/30',
   },
   purple: {
-    border: 'border-purple-500/30',
-    hoverBorder: 'group-hover:border-purple-500',
-    shadow: 'shadow-[0_0_20px_rgba(168,85,247,0.2)]',
+    node: 'border-purple-500/40 shadow-[0_0_25px_rgba(168,85,247,0.25)]',
+    nodeIcon: 'text-purple-400',
     dot: 'bg-purple-500 shadow-[0_0_8px_#a855f7]',
-    tag: 'bg-purple-500/10 text-purple-300 border-purple-500/20',
+    tag: 'bg-purple-500/10 text-purple-300 border-purple-500/20 hover:bg-purple-500/20',
     title: 'text-purple-400',
+    glow: 'hover:shadow-[0_0_40px_rgba(168,85,247,0.12)]',
+    border: 'hover:border-purple-500/30',
   },
+};
+
+const ExperienceCard = ({ job, index }) => {
+  const styles = colorStyles[job.color];
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'center center'],
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
+
+  return (
+    <motion.div
+      ref={ref}
+      className="relative group"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+    >
+      {/* Timeline Node */}
+      <div className={`absolute -left-[52px] md:-left-[76px] top-6 w-14 h-14 rounded-full flex items-center justify-center bg-black border-2 ${styles.node} z-10 transition-all duration-500`}>
+        {job.current ? (
+          <div className="relative">
+            <Briefcase className={`w-6 h-6 ${styles.nodeIcon}`} />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+          </div>
+        ) : (
+          <ChevronRight className={`w-6 h-6 ${styles.nodeIcon}`} />
+        )}
+      </div>
+
+      {/* Scroll-driven line segment */}
+      {index < experienceData.length - 1 && (
+        <motion.div
+          className="absolute -left-[46px] md:-left-[70px] top-20 w-0.5 bg-gradient-to-b from-white/20 to-transparent origin-top"
+          style={{ height: lineHeight, maxHeight: '100%' }}
+        />
+      )}
+
+      {/* Card */}
+      <div className={`glass p-8 md:p-10 rounded-3xl border border-white/5 ${styles.border} ${styles.glow} transition-all duration-500`}>
+        {/* Current badge */}
+        {job.current && (
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-semibold mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            CURRENT POSITION
+          </div>
+        )}
+
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+          <div>
+            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors">{job.role}</h3>
+            <div className={`${styles.title} font-medium text-lg mt-1`}>{job.company}</div>
+          </div>
+          <div className="text-sm text-gray-400 mt-2 md:mt-0 font-mono bg-white/5 px-4 py-1.5 rounded-full border border-white/10">
+            {job.period}
+          </div>
+        </div>
+
+        <p className="text-gray-400 mb-6 leading-relaxed">{job.description}</p>
+
+        <ul className="space-y-4 text-gray-400 mb-8 text-base">
+          {job.bullets.map((bullet, i) => (
+            <motion.li
+              key={i}
+              className="flex items-start"
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
+            >
+              <span className={`mt-2 mr-3 w-1.5 h-1.5 ${styles.dot} rounded-full flex-shrink-0`} />
+              <span className="leading-relaxed">{bullet}</span>
+            </motion.li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap gap-2.5">
+          {job.tech.map((t, i) => (
+            <span key={i} className={`px-4 py-1.5 rounded-full ${styles.tag} text-xs font-medium border transition-colors duration-200`}>
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
 };
 
 const Experience = () => (
   <section id="experience" className="py-32 px-6 relative z-10">
     <div className="max-w-5xl mx-auto">
-      <h2 className="text-4xl font-bold text-white mb-12 section-title-line">
+      <motion.h2
+        className="text-4xl font-bold text-white mb-16 section-title-line"
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         Professional Journey
-      </h2>
+      </motion.h2>
 
-      <div className="relative pl-8 md:pl-16 space-y-12">
-        {/* Timeline Line */}
+      <div className="relative pl-8 md:pl-16 space-y-14">
+        {/* Static timeline track */}
         <div className="timeline-line rounded-full" />
 
-        {experienceData.map((job, index) => {
-          const styles = colorStyles[job.color];
-          return (
-            <motion.div
-              key={index}
-              className="relative group"
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-            >
-              {/* Timeline Node */}
-              <div
-                className={`absolute -left-[50px] md:-left-[74px] top-0 w-14 h-14 glass rounded-full flex items-center justify-center ${styles.border} ${styles.hoverBorder} transition-colors bg-black z-10 ${styles.shadow}`}
-              >
-                {job.icon}
-              </div>
-
-              {/* Card */}
-              <div className="glass glass-hover p-8 md:p-10 rounded-3xl transition-all duration-300">
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white">{job.role}</h3>
-                    <div className={`${styles.title} font-medium text-lg`}>{job.company}</div>
-                  </div>
-                  <div className="text-sm text-gray-400 mt-2 md:mt-0 font-mono bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                    {job.period}
-                  </div>
-                </div>
-
-                <p className="text-gray-300 mb-6 leading-relaxed">{job.description}</p>
-
-                <ul className="space-y-4 text-gray-400 mb-8 text-base">
-                  {job.bullets.map((bullet, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className={`mt-1.5 mr-3 w-1.5 h-1.5 ${styles.dot} rounded-full flex-shrink-0`} />
-                      <span className="leading-relaxed">{bullet}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-3">
-                  {job.tech.map((t, i) => (
-                    <span key={i} className={`px-4 py-1.5 rounded-full ${styles.tag} text-xs font-medium border`}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
+        {experienceData.map((job, index) => (
+          <ExperienceCard key={index} job={job} index={index} />
+        ))}
       </div>
     </div>
   </section>
