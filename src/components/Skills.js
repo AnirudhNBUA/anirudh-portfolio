@@ -1,30 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, Brain, Database, Settings } from 'lucide-react';
+import GlowCard from './GlowCard';
 
 const skillCategories = [
   {
     title: 'Languages & Core',
     icon: Code,
     color: 'sky',
+    glowColor: 'rgba(56,189,248,0.10)',
     skills: ['Python', 'Java', 'SQL', 'DSA', 'Bash', 'OS & Network', 'Comp Arch'],
   },
   {
     title: 'AI & Frameworks',
     icon: Brain,
     color: 'purple',
+    glowColor: 'rgba(168,85,247,0.10)',
     skills: ['FastAPI', 'Flask', 'Agentic AI', 'LangGraph', 'Autogen', 'CrewAI'],
   },
   {
     title: 'Data & Security',
     icon: Database,
     color: 'pink',
+    glowColor: 'rgba(236,72,153,0.10)',
     skills: ['Snowflake', 'PostgreSQL', 'Redis', 'Authorization', 'Pandas'],
   },
   {
     title: 'DevOps & Tools',
     icon: Settings,
     color: 'green',
+    glowColor: 'rgba(74,222,128,0.10)',
     skills: ['Git', 'GitHub', 'Terraform', 'Jenkins', 'CI/CD', 'Docker', 'AWS'],
   },
 ];
@@ -101,29 +106,34 @@ const Skills = () => (
           return (
             <motion.div
               key={index}
-              className={`glass p-8 rounded-2xl group border border-white/5 ${borderColors[category.color]} transition-all duration-500`}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className={`w-12 h-12 rounded-xl ${iconBg[category.color]} flex items-center justify-center mb-6`}>
-                <Icon className={`w-6 h-6 ${titleColors[category.color]}`} />
-              </div>
-              <h3 className={`${titleColors[category.color]} font-bold mb-5 text-lg`}>
-                {category.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, i) => (
-                  <motion.span
-                    key={i}
-                    className={`px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-sm text-gray-400 ${hoverColors[category.color]} transition-all duration-200 cursor-default`}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
+              <GlowCard
+                className={`glass p-8 rounded-2xl group border border-white/[0.05] ${borderColors[category.color]} hover:border-white/[0.10] transition-all duration-500 h-full`}
+                glowColor={category.glowColor}
+                glowSize={300}
+              >
+                <div className={`w-12 h-12 rounded-xl ${iconBg[category.color]} flex items-center justify-center mb-6`}>
+                  <Icon className={`w-6 h-6 ${titleColors[category.color]}`} />
+                </div>
+                <h3 className={`${titleColors[category.color]} font-bold mb-5 text-lg`}>
+                  {category.title}
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill, i) => (
+                    <motion.span
+                      key={i}
+                      className={`px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-sm text-gray-400 ${hoverColors[category.color]} transition-all duration-200 cursor-default`}
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </GlowCard>
             </motion.div>
           );
         })}

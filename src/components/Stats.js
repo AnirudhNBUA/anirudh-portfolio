@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Zap, CheckCircle, TrendingUp } from 'lucide-react';
+import GlowCard from './GlowCard';
 
 // --- Animated Counter ---
 const AnimatedCounter = ({ target, suffix = '%', className }) => {
@@ -15,7 +16,6 @@ const AnimatedCounter = ({ target, suffix = '%', className }) => {
     const step = (timestamp) => {
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * target));
       if (progress < 1) requestAnimationFrame(step);
@@ -37,7 +37,7 @@ const stats = [
     description: 'Reduction in server load achieved via strategic Redis caching layers implementation.',
     icon: Zap,
     color: 'sky',
-    gradient: 'from-sky-500/20 to-sky-500/0',
+    glowColor: 'rgba(56,189,248,0.10)',
   },
   {
     value: 30,
@@ -45,7 +45,7 @@ const stats = [
     description: 'Decrease in post-deployment bugs through strict adherence to SOLID design principles.',
     icon: CheckCircle,
     color: 'purple',
-    gradient: 'from-purple-500/20 to-purple-500/0',
+    glowColor: 'rgba(168,85,247,0.10)',
   },
   {
     value: 25,
@@ -53,14 +53,14 @@ const stats = [
     description: 'Revenue uplift driven by the successful launch of autonomous CrewAI multi-agent features.',
     icon: TrendingUp,
     color: 'pink',
-    gradient: 'from-pink-500/20 to-pink-500/0',
+    glowColor: 'rgba(236,72,153,0.10)',
   },
 ];
 
 const colorMap = {
-  sky: { text: 'text-sky-400', iconText: 'text-sky-500/40', border: 'border-white/[0.04]', glow: 'hover:border-white/[0.08]' },
-  purple: { text: 'text-purple-400', iconText: 'text-purple-500/40', border: 'border-white/[0.04]', glow: 'hover:border-white/[0.08]' },
-  pink: { text: 'text-pink-400', iconText: 'text-pink-500/40', border: 'border-white/[0.04]', glow: 'hover:border-white/[0.08]' },
+  sky: { text: 'text-sky-400', iconText: 'text-sky-500/30' },
+  purple: { text: 'text-purple-400', iconText: 'text-purple-500/30' },
+  pink: { text: 'text-pink-400', iconText: 'text-pink-500/30' },
 };
 
 const Stats = () => (
@@ -72,17 +72,17 @@ const Stats = () => (
         return (
           <motion.div
             key={index}
-            className={`glass p-10 rounded-3xl group relative overflow-hidden border ${colors.border} ${colors.glow} transition-all duration-500`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6, delay: index * 0.15 }}
           >
-            {/* Gradient overlay on hover */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`} />
-
-            <div className="relative z-10">
-              <div className="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-25 transition-opacity duration-500">
+            <GlowCard
+              className="glass p-10 rounded-3xl group border border-white/[0.05] hover:border-white/[0.10] transition-all duration-500"
+              glowColor={stat.glowColor}
+              glowSize={400}
+            >
+              <div className="absolute top-4 right-4 opacity-[0.07] group-hover:opacity-[0.15] transition-opacity duration-500">
                 <Icon className={`w-20 h-20 ${colors.iconText}`} strokeWidth={1} />
               </div>
               <AnimatedCounter
@@ -95,7 +95,7 @@ const Stats = () => (
               <p className="text-gray-500 text-sm leading-relaxed">
                 {stat.description}
               </p>
-            </div>
+            </GlowCard>
           </motion.div>
         );
       })}

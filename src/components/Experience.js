@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Briefcase, ChevronRight } from 'lucide-react';
+import GlowCard from './GlowCard';
 
 const experienceData = [
   {
@@ -59,6 +60,7 @@ const colorStyles = {
     title: 'text-sky-400',
     glow: 'hover:shadow-[0_0_40px_rgba(14,165,233,0.12)]',
     border: 'hover:border-sky-500/30',
+    glowColor: 'rgba(14,165,233,0.08)',
   },
   purple: {
     node: 'border-purple-500/40 shadow-[0_0_25px_rgba(168,85,247,0.25)]',
@@ -68,6 +70,7 @@ const colorStyles = {
     title: 'text-purple-400',
     glow: 'hover:shadow-[0_0_40px_rgba(168,85,247,0.12)]',
     border: 'hover:border-purple-500/30',
+    glowColor: 'rgba(168,85,247,0.08)',
   },
 };
 
@@ -110,7 +113,11 @@ const ExperienceCard = ({ job, index }) => {
       )}
 
       {/* Card */}
-      <div className={`glass p-8 md:p-10 rounded-3xl border border-white/5 ${styles.border} ${styles.glow} transition-all duration-500`}>
+      <GlowCard
+        className={`glass p-8 md:p-10 rounded-3xl border border-white/[0.05] ${styles.border} ${styles.glow} transition-all duration-500`}
+        glowColor={styles.glowColor}
+        glowSize={500}
+      >
         {/* Current badge */}
         {job.current && (
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-green-400 text-xs font-semibold mb-4">
@@ -154,7 +161,7 @@ const ExperienceCard = ({ job, index }) => {
             </span>
           ))}
         </div>
-      </div>
+      </GlowCard>
     </motion.div>
   );
 };
