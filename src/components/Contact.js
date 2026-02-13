@@ -1,31 +1,53 @@
 import React from 'react';
-import { Mail, Linkedin, Github, Phone } from 'lucide-react';
-import AnimatedSection from './AnimatedSection';
-import SectionTitle from './SectionTitle';
 import { motion } from 'framer-motion';
-
-const portfolioData = {
-  contact: {
-    email: "anirudhnbua@gmail.com",
-    phone: "+91-8688456460",
-    linkedin: "https://www.linkedin.com/in/anirudh-b-k/",
-    github: "https://github.com/AnirudhNBUA",
-  }
-};
+import { Mail } from 'lucide-react';
 
 const Contact = () => (
-  <AnimatedSection id="contact">
-    <div className="container mx-auto text-center max-w-2xl">
-      <SectionTitle icon={Mail}>Get In Touch</SectionTitle>
-      <p className="text-slate-400 mb-8 text-lg"> I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out. </p>
-      <motion.a href={`mailto:${portfolioData.contact.email}`} className="inline-block bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg shadow-cyan-500/30" whileHover={{ scale: 1.05, boxShadow: "0 0 20px #22d3ee" }} transition={{ type: "spring", stiffness: 400, damping: 10 }}> Say Hello </motion.a>
-      <div className="flex justify-center space-x-8 mt-12">
-        <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-transform hover:scale-110 flex flex-col items-center gap-2"> <Linkedin size={28} /> <span className="text-xs">LinkedIn</span> </a>
-        <a href={portfolioData.contact.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-cyan-400 transition-transform hover:scale-110 flex flex-col items-center gap-2"> <Github size={28} /> <span className="text-xs">GitHub</span> </a>
-        <a href={`tel:${portfolioData.contact.phone}`} className="text-slate-400 hover:text-cyan-400 transition-transform hover:scale-110 flex flex-col items-center gap-2"> <Phone size={28} /> <span className="text-xs">Phone</span> </a>
+  <section id="contact" className="py-40 px-6 text-center relative z-10">
+    <div className="max-w-2xl mx-auto">
+      <motion.h2
+        className="text-5xl md:text-6xl font-bold mb-8 text-white tracking-tight"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
+      >
+        Ready to Innovate?
+      </motion.h2>
+
+      <motion.p
+        className="text-gray-400 mb-12 text-xl font-light"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        I'm currently focused on high-scale data engineering and AI agents. Let's build something scalable and intelligent together.
+      </motion.p>
+
+      <motion.a
+        href="mailto:anirudhnbua@gmail.com"
+        className="inline-flex items-center px-10 py-5 text-lg font-bold rounded-full bg-white text-black hover:bg-gray-100 transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.3)] btn-glow"
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        Start a Conversation
+        <Mail className="w-5 h-5 ml-2" />
+      </motion.a>
+
+      {/* Footer */}
+      <div className="mt-20 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+        <p>&copy; {new Date().getFullYear()} Anirudh BK. All rights reserved.</p>
+        <div className="flex space-x-8 mt-6 md:mt-0">
+          <a href="https://linkedin.com/in/anirudh-b-k/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
+          <a href="https://github.com/AnirudhNBUA" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
+          <a href="mailto:anirudhnbua@gmail.com" className="hover:text-white transition-colors">Email</a>
+        </div>
       </div>
     </div>
-  </AnimatedSection>
+  </section>
 );
 
 export default Contact;

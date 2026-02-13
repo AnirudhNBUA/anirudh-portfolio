@@ -1,46 +1,87 @@
 import React from 'react';
-import { Cpu, Code, Database, Cloud } from 'lucide-react';
-import AnimatedSection from './AnimatedSection';
-import SectionTitle from './SectionTitle';
-import GlowCard from './GlowCard';
 import { motion } from 'framer-motion';
-
-const portfolioData = {
-  skills: {
-    languages: ["Python", "JavaScript", "NodeJS", "SQL"],
-    frameworks: ["Express", "Flask", "React", "Bootstrap"],
-    databases: ["PostgreSQL", "MongoDB", "Redis"],
-    cloud: ["AWS", "Azure", "EC2", "S3", "RDS"],
-    tools: ["Git", "GitLab", "Docker", "Bash", "IntelliJ IDEA"],
-  }
-};
+import { Code, Box, Database, Mic } from 'lucide-react';
 
 const skillCategories = [
-  { title: "Languages & Frameworks", skills: [...portfolioData.skills.languages, ...portfolioData.skills.frameworks], icon: Code },
-  { title: "Databases", skills: portfolioData.skills.databases, icon: Database },
-  { title: "Cloud & Tools", skills: [...portfolioData.skills.cloud, ...portfolioData.skills.tools], icon: Cloud },
+  {
+    title: 'Languages & Core',
+    icon: Code,
+    color: 'sky',
+    skills: ['Python', 'Java', 'SQL', 'DSA', 'Bash', 'OS & Network', 'Comp Arch'],
+  },
+  {
+    title: 'AI & Frameworks',
+    icon: Box,
+    color: 'purple',
+    skills: ['FastAPI', 'Flask', 'Agentic AI', 'LangGraph', 'Autogen', 'CrewAI'],
+  },
+  {
+    title: 'Data & Security',
+    icon: Database,
+    color: 'pink',
+    skills: ['Snowflake', 'PostgreSQL', 'Redis', 'Authorization', 'Pandas'],
+  },
+  {
+    title: 'DevOps & Tools',
+    icon: Mic,
+    color: 'green',
+    skills: ['Git', 'GitHub', 'Terraform', 'Jenkins', 'CI/CD', 'Docker', 'AWS'],
+  },
 ];
 
+const hoverColors = {
+  sky: 'hover:border-sky-500/50 hover:bg-sky-500/10',
+  purple: 'hover:border-purple-500/50 hover:bg-purple-500/10',
+  pink: 'hover:border-pink-500/50 hover:bg-pink-500/10',
+  green: 'hover:border-green-500/50 hover:bg-green-500/10',
+};
+
+const titleColors = {
+  sky: 'text-sky-400 group-hover:text-sky-300',
+  purple: 'text-purple-400 group-hover:text-purple-300',
+  pink: 'text-pink-400 group-hover:text-pink-300',
+  green: 'text-green-400 group-hover:text-green-300',
+};
+
 const Skills = () => (
-  <AnimatedSection id="skills">
-    <div className="container mx-auto">
-      <SectionTitle icon={Cpu}>Technical Skills</SectionTitle>
-      <div className="grid md:grid-cols-3 gap-8">
-        {skillCategories.map((category, index) => (
-          <motion.div key={index} className="h-full" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.5, delay: index * 0.1 }}>
-            <GlowCard className="h-full">
-              <h3 className="text-lg font-bold text-slate-100 mb-4 flex items-center gap-2"><category.icon className="w-5 h-5 text-cyan-400"/>{category.title}</h3>
-              <div className="flex flex-wrap gap-2">
+  <section id="skills" className="py-24 px-6 bg-black/30 relative z-10">
+    <div className="max-w-6xl mx-auto">
+      <h2 className="text-4xl font-bold text-white mb-12 section-title-line">
+        Technical Arsenal
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+        {skillCategories.map((category, index) => {
+          const Icon = category.icon;
+          return (
+            <motion.div
+              key={index}
+              className="glass p-8 rounded-2xl hover:bg-white/5 transition-colors group"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <h3 className={`${titleColors[category.color]} font-bold mb-6 flex items-center gap-3 text-lg`}>
+                <Icon className="w-6 h-6" />
+                {category.title}
+              </h3>
+              <div className="flex flex-wrap gap-2.5">
                 {category.skills.map((skill, i) => (
-                  <motion.span key={i} className="text-sm bg-slate-700 text-slate-300 px-3 py-1.5 rounded-md cursor-default" whileHover={{ scale: 1.1, backgroundColor: '#22d3ee', color: '#ffffff' }} transition={{ duration: 0.2 }}>{skill}</motion.span>
+                  <span
+                    key={i}
+                    className={`px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-sm text-gray-300 ${hoverColors[category.color]} transition-all cursor-default`}
+                  >
+                    {skill}
+                  </span>
                 ))}
               </div>
-            </GlowCard>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
     </div>
-  </AnimatedSection>
+  </section>
 );
 
 export default Skills;

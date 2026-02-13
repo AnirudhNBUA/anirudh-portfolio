@@ -1,130 +1,137 @@
-import React, { useCallback } from 'react';
-import Particles from "react-tsparticles";
-import { loadSlim } from "tsparticles-slim";
+import React from 'react';
 import Header from './components/Header';
 import ScrollProgress from './components/ScrollProgress';
+import SpaceCanvas from './components/SpaceCanvas';
 import Hero from './components/Hero';
-import About from './components/About';
+import Stats from './components/Stats';
 import Experience from './components/Experience';
-import Projects from './components/Projects';
 import Skills from './components/Skills';
+import Projects from './components/Projects';
 import EducationAndMore from './components/EducationAndMore';
 import Contact from './components/Contact';
-import Footer from './components/Footer';
-import BackToTopButton from './components/BackToTopButton';
+import AIChatbot from './components/AIChatbot';
 
-// --- Particle Config ---
-const particlesOptions = {
-    background: { color: { value: "transparent" } },
-    fpsLimit: 60,
-    interactivity: {
-        events: {
-            onHover: { enable: true, mode: "grab" },
-            resize: true,
-        },
-        modes: {
-            grab: { distance: 140, links: { opacity: 1 } },
-        },
-    },
-    particles: {
-        color: { value: "#ffffff" },
-        links: {
-            color: "#ffffff",
-            distance: 150,
-            enable: true,
-            opacity: 0.2,
-            width: 1,
-        },
-        move: {
-            direction: "none",
-            enable: true,
-            outModes: { default: "bounce" },
-            random: false,
-            speed: 1,
-            straight: false,
-        },
-        number: {
-            density: { enable: true, area: 800 },
-            value: 80,
-        },
-        opacity: { value: 0.2 },
-        shape: { type: "circle" },
-        size: { value: { min: 1, max: 3 } },
-    },
-    detectRetina: true,
-};
-
-// --- Main App Component ---
 export default function App() {
-  const particlesInit = useCallback(async engine => { await loadSlim(engine); }, []);
   return (
     <>
       <style>{`
-        .aurora-bg {
-          background: #0f172a;
-          background: linear-gradient(125deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-          background-size: 400% 400%;
-          animation: aurora 15s ease infinite;
+        body {
+          font-family: 'Inter', sans-serif;
+          background-color: #000000;
+          color: #f3f4f6;
+          background-image: 
+            radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.05), transparent 25%), 
+            radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.05), transparent 25%);
+          background-attachment: fixed;
+          overflow-x: hidden;
         }
-        @keyframes aurora {
-          0%{background-position:0% 50%}
-          50%{background-position:100% 50%}
-          100%{background-position:0% 50%}
+
+        /* Premium Glassmorphism */
+        .glass {
+          background: rgba(18, 18, 18, 0.65);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .animate-gradient-x {
-          background-size: 200% 200%;
-          animation: gradient-x 5s ease infinite;
+        
+        .glass-hover:hover {
+          background: rgba(30, 30, 30, 0.8);
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
-        @keyframes gradient-x {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
+
+        .glass-nav {
+          background: rgba(5, 5, 5, 0.8);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .glow-card {
-          position: relative;
+
+        /* Typography & Gradients */
+        .text-gradient {
+          background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
-        .glow-card:before {
+
+        /* Timeline */
+        .timeline-line {
+          position: absolute;
+          left: 28px;
+          top: 20px;
+          bottom: 20px;
+          width: 2px;
+          background: linear-gradient(to bottom, #38bdf8, #a855f7, rgba(168, 85, 247, 0.1));
+        }
+
+        /* Scroll hide */
+        .scroll-hide::-webkit-scrollbar { display: none; }
+        .scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Float animation */
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-6px); }
+          100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        /* Typing dots */
+        .typing-dot { animation: typing 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+          0%, 80%, 100% { transform: scale(0); }
+          40% { transform: scale(1); }
+        }
+
+        /* Button glow */
+        .btn-glow { position: relative; overflow: hidden; }
+        .btn-glow::before {
           content: '';
           position: absolute;
-          left: 0;
           top: 0;
+          left: -100%;
           width: 100%;
           height: 100%;
-          background: radial-gradient(
-            350px circle at var(--glow-x) var(--glow-y),
-            rgba(45, 212, 191, 0.2),
-            transparent
-          );
-          opacity: var(--glow-opacity, 0);
-          transition: opacity 0.3s ease;
-          border-radius: inherit;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: 0.5s;
         }
-        .glow-effect {
+        .btn-glow:hover::before { left: 100%; }
+
+        /* Section title underline */
+        .section-title-line {
+          position: relative;
+          display: inline-block;
+        }
+        .section-title-line::after {
+          content: '';
           position: absolute;
+          bottom: -10px;
           left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          border-radius: inherit;
-          box-shadow: inset 0 0 0 1px #fff2;
+          width: 60px;
+          height: 4px;
+          background: linear-gradient(to right, #38bdf8, #a855f7);
+          border-radius: 2px;
         }
       `}</style>
-      <div className="font-sans leading-normal tracking-tight text-white aurora-bg">
+      <div className="font-sans leading-normal tracking-tight text-white relative">
+        <SpaceCanvas />
         <ScrollProgress />
-        <Particles id="tsparticles" init={particlesInit} options={particlesOptions} className="fixed top-0 left-0 w-full h-full z-0" />
-        <div className="relative z-10">
-          <Header />
-          <main>
-            <Hero />
-            <About />
-            <Experience />
-            <Projects />
-            <Skills />
-            <EducationAndMore />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-        <BackToTopButton />
+        <Header />
+        <main>
+          <Hero />
+          <Stats />
+          <Experience />
+          <Skills />
+          <Projects />
+          <EducationAndMore />
+          <Contact />
+        </main>
+        <AIChatbot />
       </div>
     </>
   );
