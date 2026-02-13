@@ -64,8 +64,8 @@ const colorMap = {
 };
 
 const Stats = () => (
-  <section className="py-20 px-6 relative z-10">
-    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+  <section className="py-12 sm:py-20 px-4 sm:px-6 relative z-10">
+    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
       {stats.map((stat, index) => {
         const colors = colorMap[stat.color];
         const Icon = stat.icon;
@@ -78,7 +78,7 @@ const Stats = () => (
             transition={{ duration: 0.6, delay: index * 0.15 }}
           >
             <GlowCard
-              className="glass p-10 rounded-3xl group border border-white/[0.05] hover:border-white/[0.10] transition-all duration-500"
+              className="glass p-6 sm:p-10 rounded-2xl sm:rounded-3xl group border border-white/[0.05] hover:border-white/[0.10] transition-all duration-500"
               glowColor={stat.glowColor}
               glowSize={400}
             >
@@ -87,7 +87,7 @@ const Stats = () => (
               </div>
               <AnimatedCounter
                 target={stat.value}
-                className={`text-6xl font-extrabold ${colors.text} mb-3 block`}
+                className={`text-4xl sm:text-6xl font-extrabold ${colors.text} mb-3 block`}
               />
               <div className="text-sm text-gray-400 font-bold uppercase tracking-wider mb-3">
                 {stat.label}

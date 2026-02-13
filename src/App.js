@@ -15,6 +15,15 @@ export default function App() {
   return (
     <>
       <style>{`
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+
         body {
           font-family: 'Inter', sans-serif;
           background-color: #050505;
@@ -38,10 +47,16 @@ export default function App() {
         }
 
         .glass-nav {
-          background: rgba(5, 5, 5, 0.85);
+          background: rgba(5, 5, 5, 0.95);
           backdrop-filter: blur(24px);
           -webkit-backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        @media (min-width: 768px) {
+          .glass-nav {
+            background: rgba(5, 5, 5, 0.85);
+          }
         }
 
         /* Text gradient */
@@ -132,7 +147,13 @@ export default function App() {
 
         /* Section scroll offset */
         section[id] {
-          scroll-margin-top: 5rem;
+          scroll-margin-top: 4rem;
+        }
+
+        @media (min-width: 640px) {
+          section[id] {
+            scroll-margin-top: 5rem;
+          }
         }
 
         /* Subtle divider between sections */

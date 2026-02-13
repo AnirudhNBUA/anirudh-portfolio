@@ -34,7 +34,7 @@ const certifications = [
 ];
 
 const EducationAndMore = () => (
-  <section className="py-28 px-6 relative z-10">
+  <section className="py-16 sm:py-28 px-4 sm:px-6 relative z-10">
     <div className="max-w-6xl mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Education */}
@@ -44,20 +44,20 @@ const EducationAndMore = () => (
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold text-white mb-10 section-title-line">Education</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-10 section-title-line">Education</h2>
 
           <GlowCard
-            className="glass p-10 rounded-3xl border border-white/[0.05] hover:border-sky-500/20 transition-all duration-500 group mt-6"
+            className="glass p-6 sm:p-10 rounded-2xl sm:rounded-3xl border border-white/[0.05] hover:border-sky-500/20 transition-all duration-500 group mt-6"
             glowColor="rgba(56,189,248,0.08)"
             glowSize={450}
           >
-            <div className="flex items-start gap-6">
-              <div className="w-16 h-16 rounded-2xl bg-sky-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-sky-500/15 transition-colors">
-                <GraduationCap className="w-8 h-8 text-sky-400" />
+            <div className="flex items-start gap-4 sm:gap-6">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-sky-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-sky-500/15 transition-colors">
+                <GraduationCap className="w-6 h-6 sm:w-8 sm:h-8 text-sky-400" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white leading-tight">Bachelor of Information Technology</h3>
-                <p className="text-sky-400 mt-2 text-lg font-medium">Vellore Institute of Technology</p>
+                <h3 className="text-lg sm:text-2xl font-bold text-white leading-tight">Bachelor of Information Technology</h3>
+                <p className="text-sky-400 mt-2 text-base sm:text-lg font-medium">Vellore Institute of Technology</p>
                 <div className="flex items-center gap-4 mt-4">
                   <span className="text-sm text-gray-400 font-mono bg-white/5 px-3 py-1 rounded-full border border-white/10">
                     CGPA: 8.58
@@ -87,7 +87,7 @@ const EducationAndMore = () => (
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-4xl font-bold text-white mb-10 section-title-line">Certifications</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-10 section-title-line">Certifications</h2>
 
           <div className="space-y-4 mt-6">
             {certifications.map((cert, i) => (
@@ -99,8 +99,8 @@ const EducationAndMore = () => (
                 transition={{ duration: 0.4, delay: 0.3 + i * 0.1 }}
                 whileHover={{ x: 4 }}
               >
-                <GlowCard
-                  className={`glass p-6 rounded-2xl flex items-center gap-5 border border-white/[0.05] ${cert.border} transition-all duration-300 group cursor-default`}
+                  <GlowCard
+                  className={`glass p-4 sm:p-6 rounded-xl sm:rounded-2xl flex items-center gap-3 sm:gap-5 border border-white/[0.05] ${cert.border} transition-all duration-300 group cursor-default`}
                   glowColor={cert.glowColor}
                   glowSize={300}
                 >

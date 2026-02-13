@@ -70,11 +70,11 @@ const marqueeItems = [
 ];
 
 const Skills = () => (
-  <section id="skills" className="py-28 px-6 relative z-10 overflow-hidden">
+  <section id="skills" className="py-16 sm:py-28 px-4 sm:px-6 relative z-10 overflow-hidden">
     {/* Tech Marquee */}
     <div className="mb-20 relative">
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
       <div className="marquee-container">
         <div className="marquee-track">
           {[...marqueeItems, ...marqueeItems].map((item, i) => (
@@ -91,7 +91,7 @@ const Skills = () => (
 
     <div className="max-w-6xl mx-auto">
       <motion.h2
-        className="text-4xl font-bold text-white mb-16 section-title-line"
+        className="text-3xl sm:text-4xl font-bold text-white mb-10 sm:mb-16 section-title-line"
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -112,7 +112,7 @@ const Skills = () => (
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <GlowCard
-                className={`glass p-8 rounded-2xl group border border-white/[0.05] ${borderColors[category.color]} hover:border-white/[0.10] transition-all duration-500 h-full`}
+                className={`glass p-5 sm:p-8 rounded-2xl sm:rounded-2xl group border border-white/[0.05] ${borderColors[category.color]} hover:border-white/[0.10] transition-all duration-500 h-full`}
                 glowColor={category.glowColor}
                 glowSize={300}
               >

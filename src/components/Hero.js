@@ -42,7 +42,7 @@ const Hero = () => {
   const typedText = useTypingEffect(roles);
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
+    <section id="about" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-20 pb-10 relative overflow-hidden">
       {/* Ambient gradient washes */}
       <div
         className="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none"
@@ -66,7 +66,7 @@ const Hero = () => {
 
         {/* Main Title */}
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 leading-[1.08] tracking-tight text-white"
+          className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 leading-[1.08] tracking-tight text-white"
           initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -82,7 +82,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <span className="text-xl md:text-2xl text-gray-500 font-light tracking-wide">
+          <span className="text-lg sm:text-xl md:text-2xl text-gray-500 font-light tracking-wide">
             {typedText}
           </span>
           <span className="inline-block w-[2px] h-6 bg-sky-400/70 ml-1 animate-blink" />
@@ -90,7 +90,7 @@ const Hero = () => {
 
         {/* Subtitle — readable weight */}
         <motion.p
-          className="text-base md:text-lg text-gray-300/90 max-w-2xl mx-auto mb-14 leading-[1.8] font-normal"
+          className="text-sm sm:text-base md:text-lg text-gray-300/90 max-w-2xl mx-auto mb-10 sm:mb-14 leading-[1.8] font-normal px-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}

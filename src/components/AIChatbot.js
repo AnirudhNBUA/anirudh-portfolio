@@ -115,10 +115,10 @@ const AIChatbot = () => {
   return (
     <>
       {/* Floating Chat Button */}
-      <div className="fixed bottom-8 right-8 z-50 animate-float">
+      <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 animate-float">
         <button
           onClick={toggleChat}
-          className="flex items-center gap-3 px-6 py-4 rounded-full bg-gradient-to-r from-sky-600 to-purple-600 text-white font-bold shadow-2xl hover:shadow-sky-500/50 transition-all transform hover:scale-105 group border border-white/10"
+          className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-full bg-gradient-to-r from-sky-600 to-purple-600 text-white font-bold shadow-2xl hover:shadow-sky-500/50 transition-all transform hover:scale-105 group border border-white/10 text-sm sm:text-base"
         >
           <span className="text-xl">✨</span>
           <span>Ask my AI Agent</span>
@@ -127,11 +127,11 @@ const AIChatbot = () => {
 
       {/* Chat Modal */}
       <div
-        className={`fixed bottom-28 right-8 z-50 w-full max-w-sm transform transition-all duration-300 origin-bottom-right ${
+        className={`fixed bottom-20 sm:bottom-28 right-2 sm:right-8 z-50 w-[calc(100%-1rem)] sm:w-full max-w-sm transform transition-all duration-300 origin-bottom-right ${
           isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'
         }`}
       >
-        <div className="glass rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col h-[500px]">
+        <div className="glass rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10 flex flex-col h-[70vh] sm:h-[500px]">
           {/* Header */}
           <div className="bg-white/5 p-4 flex justify-between items-center border-b border-white/10 backdrop-blur-md">
             <div className="flex items-center gap-3">

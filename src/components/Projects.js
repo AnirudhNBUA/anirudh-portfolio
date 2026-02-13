@@ -71,10 +71,10 @@ const projectsData = [
 ];
 
 const Projects = () => (
-  <section id="projects" className="py-28 px-6 relative z-10">
+  <section id="projects" className="py-16 sm:py-28 px-4 sm:px-6 relative z-10">
     <div className="max-w-6xl mx-auto">
       <motion.h2
-        className="text-4xl font-bold text-white mb-16 section-title-line"
+        className="text-3xl sm:text-4xl font-bold text-white mb-10 sm:mb-16 section-title-line"
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -93,16 +93,16 @@ const Projects = () => (
             transition={{ duration: 0.6, delay: index * 0.15 }}
           >
             <GlowCard
-              className="glass p-10 rounded-3xl group border border-white/[0.05] hover:border-white/[0.12] transition-all duration-500"
+              className="glass p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl group border border-white/[0.05] hover:border-white/[0.12] transition-all duration-500"
               glowColor={project.glowColor}
               glowSize={450}
             >
-              <div className="flex justify-between items-start mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center border border-white/[0.06]">
-                    <ExternalLink className="w-4 h-4 text-gray-500" />
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-4 sm:mb-6 gap-3">
+                <div className="flex items-start sm:items-center gap-3 min-w-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/[0.04] flex items-center justify-center border border-white/[0.06] flex-shrink-0">
+                    <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-500" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">
+                  <h3 className="text-lg sm:text-2xl font-bold text-white break-words">
                     {project.title}
                   </h3>
                 </div>
@@ -117,7 +117,7 @@ const Projects = () => (
                   </a>
                 )}
               </div>
-              <p className="text-gray-400 mb-8 leading-relaxed text-[15px]">{project.description}</p>
+              <p className="text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-[15px]">{project.description}</p>
               <div className="flex flex-wrap gap-2 text-sm text-gray-400">
                 {project.tech.map((t, i) => (
                   <span key={i} className="px-3 py-1.5 rounded-lg border border-white/[0.06] bg-white/[0.02] text-xs font-medium">

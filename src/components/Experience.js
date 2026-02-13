@@ -93,7 +93,7 @@ const ExperienceCard = ({ job, index }) => {
       transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       {/* Timeline Node */}
-      <div className={`absolute -left-[52px] md:-left-[76px] top-6 w-14 h-14 rounded-full flex items-center justify-center bg-black border-2 ${styles.node} z-10 transition-all duration-500`}>
+      <div className={`hidden sm:flex absolute -left-[52px] md:-left-[76px] top-6 w-14 h-14 rounded-full items-center justify-center bg-black border-2 ${styles.node} z-10 transition-all duration-500`}>
         {job.current ? (
           <div className="relative">
             <Briefcase className={`w-6 h-6 ${styles.nodeIcon}`} />
@@ -107,14 +107,14 @@ const ExperienceCard = ({ job, index }) => {
       {/* Scroll-driven line segment */}
       {index < experienceData.length - 1 && (
         <motion.div
-          className="absolute -left-[46px] md:-left-[70px] top-20 w-0.5 bg-gradient-to-b from-white/20 to-transparent origin-top"
+          className="hidden sm:block absolute -left-[46px] md:-left-[70px] top-20 w-0.5 bg-gradient-to-b from-white/20 to-transparent origin-top"
           style={{ height: lineHeight, maxHeight: '100%' }}
         />
       )}
 
       {/* Card */}
       <GlowCard
-        className={`glass p-8 md:p-10 rounded-3xl border border-white/[0.05] ${styles.border} ${styles.glow} transition-all duration-500`}
+        className={`glass p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-white/[0.05] ${styles.border} ${styles.glow} transition-all duration-500`}
         glowColor={styles.glowColor}
         glowSize={500}
       >
@@ -128,17 +128,17 @@ const ExperienceCard = ({ job, index }) => {
 
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
           <div>
-            <h3 className="text-2xl font-bold text-white group-hover:text-white/90 transition-colors">{job.role}</h3>
-            <div className={`${styles.title} font-medium text-lg mt-1`}>{job.company}</div>
+            <h3 className="text-lg sm:text-2xl font-bold text-white group-hover:text-white/90 transition-colors">{job.role}</h3>
+            <div className={`${styles.title} font-medium text-base sm:text-lg mt-1`}>{job.company}</div>
           </div>
           <div className="text-sm text-gray-400 mt-2 md:mt-0 font-mono bg-white/5 px-4 py-1.5 rounded-full border border-white/10">
             {job.period}
           </div>
         </div>
 
-        <p className="text-gray-400 mb-6 leading-relaxed">{job.description}</p>
+        <p className="text-sm sm:text-base text-gray-400 mb-4 sm:mb-6 leading-relaxed">{job.description}</p>
 
-        <ul className="space-y-4 text-gray-400 mb-8 text-base">
+        <ul className="space-y-3 sm:space-y-4 text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">
           {job.bullets.map((bullet, i) => (
             <motion.li
               key={i}
@@ -167,10 +167,10 @@ const ExperienceCard = ({ job, index }) => {
 };
 
 const Experience = () => (
-  <section id="experience" className="py-32 px-6 relative z-10">
+  <section id="experience" className="py-16 sm:py-32 px-4 sm:px-6 relative z-10">
     <div className="max-w-5xl mx-auto">
       <motion.h2
-        className="text-4xl font-bold text-white mb-16 section-title-line"
+        className="text-3xl sm:text-4xl font-bold text-white mb-10 sm:mb-16 section-title-line"
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -179,9 +179,9 @@ const Experience = () => (
         Professional Journey
       </motion.h2>
 
-      <div className="relative pl-8 md:pl-16 space-y-14">
+      <div className="relative pl-4 sm:pl-8 md:pl-16 space-y-8 sm:space-y-14">
         {/* Static timeline track */}
-        <div className="timeline-line rounded-full" />
+        <div className="timeline-line hidden sm:block rounded-full" />
 
         {experienceData.map((job, index) => (
           <ExperienceCard key={index} job={job} index={index} />

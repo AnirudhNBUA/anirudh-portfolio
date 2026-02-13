@@ -9,7 +9,7 @@ const socialLinks = [
 ];
 
 const Contact = () => (
-  <section id="contact" className="py-40 px-6 text-center relative z-10">
+  <section id="contact" className="py-20 sm:py-40 px-4 sm:px-6 text-center relative z-10">
     <div className="max-w-3xl mx-auto">
       {/* Decorative gradient orb */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-sky-500/[0.04] via-purple-500/[0.03] to-transparent blur-3xl pointer-events-none" />
@@ -25,7 +25,7 @@ const Contact = () => (
       </motion.p>
 
       <motion.h2
-        className="text-5xl md:text-7xl font-bold mb-8 text-white tracking-tight"
+        className="text-3xl sm:text-5xl md:text-7xl font-bold mb-8 text-white tracking-tight"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -36,7 +36,7 @@ const Contact = () => (
       </motion.h2>
 
       <motion.p
-        className="text-gray-400 mb-14 text-xl font-light leading-relaxed max-w-xl mx-auto"
+        className="text-gray-400 mb-10 sm:mb-14 text-base sm:text-xl font-light leading-relaxed max-w-xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
