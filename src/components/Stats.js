@@ -58,9 +58,9 @@ const stats = [
 ];
 
 const colorMap = {
-  sky: { text: 'text-sky-400', iconText: 'text-sky-500', border: 'border-sky-500/20', glow: 'group-hover:shadow-[0_0_40px_rgba(56,189,248,0.15)]' },
-  purple: { text: 'text-purple-400', iconText: 'text-purple-500', border: 'border-purple-500/20', glow: 'group-hover:shadow-[0_0_40px_rgba(168,85,247,0.15)]' },
-  pink: { text: 'text-pink-400', iconText: 'text-pink-500', border: 'border-pink-500/20', glow: 'group-hover:shadow-[0_0_40px_rgba(236,72,153,0.15)]' },
+  sky: { text: 'text-sky-400', iconText: 'text-sky-500/40', border: 'border-white/[0.04]', glow: 'hover:border-white/[0.08]' },
+  purple: { text: 'text-purple-400', iconText: 'text-purple-500/40', border: 'border-white/[0.04]', glow: 'hover:border-white/[0.08]' },
+  pink: { text: 'text-pink-400', iconText: 'text-pink-500/40', border: 'border-white/[0.04]', glow: 'hover:border-white/[0.08]' },
 };
 
 const Stats = () => (
@@ -72,7 +72,7 @@ const Stats = () => (
         return (
           <motion.div
             key={index}
-            className={`glass p-10 rounded-3xl group relative overflow-hidden border ${colors.border} ${colors.glow} transition-shadow duration-500`}
+            className={`glass p-10 rounded-3xl group relative overflow-hidden border ${colors.border} ${colors.glow} transition-all duration-500`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.5 }}

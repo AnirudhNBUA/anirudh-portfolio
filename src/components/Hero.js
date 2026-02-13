@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ChevronDown } from 'lucide-react';
+import { Github } from 'lucide-react';
 
 // --- Typing Effect Hook ---
 const useTypingEffect = (words, typeSpeed = 80, deleteSpeed = 40, pauseDelay = 2000) => {
@@ -36,41 +36,6 @@ const useTypingEffect = (words, typeSpeed = 80, deleteSpeed = 40, pauseDelay = 2
   return text;
 };
 
-// --- Magnetic Button ---
-const MagneticButton = ({ children, className, href, ...props }) => {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const ref = React.useRef(null);
-
-  const handleMouseMove = useCallback((e) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
-    setOffset({ x, y });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setOffset({ x: 0, y: 0 });
-  }, []);
-
-  return (
-    <a
-      ref={ref}
-      href={href}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className={className}
-      style={{
-        transform: `translate(${offset.x}px, ${offset.y}px)`,
-        transition: 'transform 0.2s ease-out',
-      }}
-      {...props}
-    >
-      {children}
-    </a>
-  );
-};
-
 const roles = ['Python Developer', 'AI Engineer', 'Backend Architect', 'Data Pipeline Expert', 'Multi-Agent Builder'];
 
 const Hero = () => {
@@ -78,13 +43,14 @@ const Hero = () => {
 
   return (
     <section id="about" className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden">
-      {/* Animated gradient orbs */}
-      <div className="absolute top-1/4 left-[10%] w-[600px] h-[600px] rounded-full blur-[150px] -z-10 opacity-30 animate-orb-1"
-        style={{ background: 'radial-gradient(circle, rgba(56,189,248,0.3) 0%, transparent 70%)' }} />
-      <div className="absolute bottom-[10%] right-[10%] w-[500px] h-[500px] rounded-full blur-[140px] -z-10 opacity-25 animate-orb-2"
-        style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)' }} />
-      <div className="absolute top-[60%] left-[50%] w-[400px] h-[400px] rounded-full blur-[120px] -z-10 opacity-15 animate-orb-3"
-        style={{ background: 'radial-gradient(circle, rgba(236,72,153,0.25) 0%, transparent 70%)' }} />
+      {/* Ambient gradient washes */}
+      <div
+        className="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 50% at 20% 40%, rgba(56,189,248,0.04) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 60%, rgba(168,85,247,0.035) 0%, transparent 70%)',
+        }}
+      />
 
       <div className="max-w-5xl mx-auto text-center z-10">
         {/* Status Badge */}
@@ -92,15 +58,15 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 0.8 }}
-          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass mb-10 text-xs font-semibold uppercase tracking-widest text-sky-300 border border-sky-500/20"
+          className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full glass mb-10 text-xs font-semibold uppercase tracking-widest text-gray-400 border border-white/[0.06]"
         >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_#4ade80]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]" />
           Open to Opportunities
         </motion.div>
 
         {/* Main Title */}
         <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 leading-tight tracking-tight text-white"
+          className="text-5xl md:text-7xl lg:text-8xl font-extrabold mb-4 leading-[1.08] tracking-tight text-white"
           initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1, delay: 0.2 }}
@@ -116,62 +82,45 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <span className="text-xl md:text-2xl text-gray-400 font-light">
+          <span className="text-xl md:text-2xl text-gray-500 font-light tracking-wide">
             {typedText}
           </span>
-          <span className="inline-block w-[3px] h-7 bg-sky-400 ml-1 animate-blink" />
+          <span className="inline-block w-[2px] h-6 bg-sky-400/70 ml-1 animate-blink" />
         </motion.div>
 
-        {/* Subtitle */}
+        {/* Subtitle — readable weight */}
         <motion.p
-          className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto mb-12 leading-relaxed font-light"
+          className="text-base md:text-lg text-gray-300/90 max-w-2xl mx-auto mb-14 leading-[1.8] font-normal"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           Building the backbone of modern applications — from scalable financial data pipelines
-          at <strong className="text-gray-300">Morgan Stanley</strong> to autonomous multi-agent networks.
+          at <span className="text-white font-semibold">Morgan Stanley</span> to autonomous multi-agent networks.
         </motion.p>
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-5"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          <MagneticButton
+          <a
             href="#experience"
-            className="w-full sm:w-auto px-10 py-4 rounded-full bg-white text-black font-bold hover:bg-gray-100 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] btn-glow text-center inline-block"
+            className="w-full sm:w-auto px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-100 transition-all duration-300 text-center shadow-[0_2px_20px_rgba(255,255,255,0.08)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.15)]"
           >
             Explore My Work
-          </MagneticButton>
-          <MagneticButton
+          </a>
+          <a
             href="https://github.com/AnirudhNBUA"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-10 py-4 rounded-full glass hover:bg-white/10 transition-all flex items-center justify-center gap-3 text-white border border-white/10 hover:border-white/30 inline-flex"
+            className="w-full sm:w-auto px-10 py-4 rounded-full border border-white/10 hover:border-white/25 bg-transparent hover:bg-white/[0.03] transition-all duration-300 flex items-center justify-center gap-3 text-gray-300 hover:text-white"
           >
             <Github className="w-5 h-5" />
             GitHub Profile
-          </MagneticButton>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-2 text-gray-600"
-          >
-            <span className="text-xs uppercase tracking-widest">Scroll</span>
-            <ChevronDown className="w-4 h-4" />
-          </motion.div>
+          </a>
         </motion.div>
       </div>
     </section>

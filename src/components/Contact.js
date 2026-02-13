@@ -55,7 +55,7 @@ const Contact = () => (
       >
         <a
           href="mailto:anirudhnbua@gmail.com"
-          className="group relative inline-flex items-center gap-3 px-10 py-5 text-lg font-bold rounded-full bg-white text-black hover:bg-gray-100 transition-all transform hover:scale-105 shadow-[0_0_40px_rgba(255,255,255,0.2)] btn-glow"
+          className="group relative inline-flex items-center gap-3 px-10 py-5 text-lg font-semibold rounded-full bg-white text-black hover:bg-gray-100 transition-all duration-300 hover:scale-[1.02] shadow-[0_2px_20px_rgba(255,255,255,0.08)] hover:shadow-[0_4px_30px_rgba(255,255,255,0.14)]"
         >
           Start a Conversation
           <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -76,7 +76,7 @@ const Contact = () => (
             href={href}
             target={href.startsWith('mailto') ? undefined : '_blank'}
             rel="noopener noreferrer"
-            className="group w-12 h-12 rounded-full glass border border-white/10 hover:border-white/30 flex items-center justify-center transition-all duration-300 hover:scale-110"
+            className="group w-11 h-11 rounded-full border border-white/[0.08] hover:border-white/20 bg-white/[0.02] hover:bg-white/[0.05] flex items-center justify-center transition-all duration-300"
             aria-label={label}
           >
             <Icon className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
