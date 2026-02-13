@@ -20,6 +20,54 @@ const projectsData = [
     github: null,
     glowColor: 'rgba(168,85,247,0.10)',
   },
+  {
+    title: 'Mapty Workout Tracker',
+    description:
+      'A geo-location based workout tracking application built with modern JavaScript. Users can log running and cycling workouts on an interactive map, with data persisted in local storage.',
+    tech: ['JavaScript', 'Leaflet.js', 'Geolocation API', 'OOP'],
+    github: 'https://github.com/AnirudhNBUA/mapty-workout-tracker',
+    glowColor: 'rgba(34,197,94,0.10)',
+  },
+  {
+    title: 'PLDD-SRGAN',
+    description:
+      'Plant leaf disease detection using Super Resolution Generative Adversarial Networks (SRGAN). Leverages deep learning to enhance leaf images and classify diseases accurately. Deployed as a Flask web application.',
+    tech: ['Python', 'SRGAN', 'Flask', 'Deep Learning'],
+    github: 'https://github.com/AnirudhNBUA/PLDD-SRGAN',
+    glowColor: 'rgba(251,146,60,0.10)',
+  },
+  {
+    title: 'Chronic Kidney Disease Detection',
+    description:
+      'A modern machine learning project using ensemble techniques to predict chronic kidney disease from the Kaggle dataset. Compared multiple classifiers to achieve high accuracy.',
+    tech: ['Python', 'Scikit-learn', 'Ensemble ML', 'Jupyter'],
+    github: 'https://github.com/AnirudhNBUA/Chronic-Kidney-Disease-Detection',
+    glowColor: 'rgba(244,63,94,0.10)',
+  },
+  {
+    title: 'Pig Game',
+    description:
+      'A fun two-player dice game built with JavaScript. Players take turns rolling a dice and accumulating scores, with the risk of losing their turn score on rolling a 1.',
+    tech: ['JavaScript', 'CSS', 'HTML', 'DOM Manipulation'],
+    github: 'https://github.com/AnirudhNBUA/pig-game',
+    glowColor: 'rgba(234,179,8,0.10)',
+  },
+  {
+    title: 'Guess My Number',
+    description:
+      'A simple and interactive number guessing game. Players try to guess a secret number between 1 and 20, receiving hints after each attempt. Built with vanilla JavaScript.',
+    tech: ['JavaScript', 'HTML', 'CSS', 'DOM Manipulation'],
+    github: 'https://github.com/AnirudhNBUA/guess-my-number',
+    glowColor: 'rgba(139,92,246,0.10)',
+  },
+  {
+    title: 'TinDog',
+    description:
+      'A super responsive front-end landing page inspired by Tinder — but for dogs! Features a modern UI with Bootstrap components, pricing sections, and testimonials.',
+    tech: ['HTML', 'CSS', 'Bootstrap', 'Responsive Design'],
+    github: 'https://github.com/AnirudhNBUA/TinDog',
+    glowColor: 'rgba(236,72,153,0.10)',
+  },
 ];
 
 const Projects = () => (
