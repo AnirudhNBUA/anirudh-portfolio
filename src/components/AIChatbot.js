@@ -90,6 +90,9 @@ const AIChatbot = () => {
     ${RESUME_CONTEXT}`;
 
     const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+    if (!apiKey) {
+      return "I'm currently unavailable. The AI service is not configured. Please contact Anirudh directly at anirudhnbua@gmail.com.";
+    }
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
     const payload = {
