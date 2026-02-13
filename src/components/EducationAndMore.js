@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, ExternalLink } from 'lucide-react';
+import { GraduationCap, Award, ExternalLink, School } from 'lucide-react';
 import GlowCard from './GlowCard';
 
 const certifications = [
@@ -78,6 +78,64 @@ const EducationAndMore = () => (
               ))}
             </div>
           </GlowCard>
+
+          {/* 10+2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <GlowCard
+              className="glass p-5 sm:p-8 rounded-2xl border border-white/[0.05] hover:border-purple-500/20 transition-all duration-500 group mt-4"
+              glowColor="rgba(168,85,247,0.08)"
+              glowSize={350}
+            >
+              <div className="flex items-start gap-4 sm:gap-5">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/15 transition-colors">
+                  <School className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-xl font-bold text-white leading-tight">Intermediate (10+2)</h3>
+                  <p className="text-purple-400 mt-1 text-sm sm:text-base font-medium">BIEAP</p>
+                  <div className="mt-3">
+                    <span className="text-sm text-gray-400 font-mono bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                      CGPA: 9.79
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </GlowCard>
+          </motion.div>
+
+          {/* 10th */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <GlowCard
+              className="glass p-5 sm:p-8 rounded-2xl border border-white/[0.05] hover:border-emerald-500/20 transition-all duration-500 group mt-4"
+              glowColor="rgba(52,211,153,0.08)"
+              glowSize={350}
+            >
+              <div className="flex items-start gap-4 sm:gap-5">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-500/15 transition-colors">
+                  <School className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <h3 className="text-base sm:text-xl font-bold text-white leading-tight">SSC (10th)</h3>
+                  <p className="text-emerald-400 mt-1 text-sm sm:text-base font-medium">BSEAP</p>
+                  <div className="mt-3">
+                    <span className="text-sm text-gray-400 font-mono bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                      CGPA: 9.8
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </GlowCard>
+          </motion.div>
         </motion.div>
 
         {/* Certifications */}

@@ -23,7 +23,10 @@ Previous Role: AI/ML Backend Engineer at Accenture (Aug 2023 - Jun 2025)
      2. Implemented LangChain workflows to convert 150+ user stories into technical specs.
      3. Engineered scalable Flask servers.
 
-Education: B.Tech IT from Vellore Institute of Technology (VIT), CGPA 8.58.
+Education:
+   - B.Tech IT from Vellore Institute of Technology (VIT), CGPA 8.58 (2019-2023).
+   - Intermediate (10+2) from BIEAP, CGPA 9.79.
+   - SSC (10th) from BSEAP, CGPA 9.8.
 
 Tech Stack:
    - Languages: Python, Java, SQL, Bash.
