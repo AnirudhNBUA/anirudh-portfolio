@@ -112,7 +112,7 @@ const Header = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="md:hidden absolute top-16 left-0 w-full bg-[#0a0a0a]/98 backdrop-blur-2xl border-t border-white/[0.08] p-4 pb-6 flex flex-col space-y-1 z-40 shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+            className="md:hidden absolute top-16 left-0 w-full bg-[#0a0a0a] border-t border-white/[0.08] p-4 pb-6 flex flex-col space-y-1 z-40 shadow-[0_20px_60px_rgba(0,0,0,0.9)]"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
