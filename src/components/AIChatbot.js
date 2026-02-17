@@ -48,6 +48,12 @@ const AIChatbot = () => {
       body: JSON.stringify({ query: userQuery }),
     });
 
+    // Check if response is actually JSON (not HTML from redirect)
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      throw new Error('Function not available');
+    }
+
     const data = await response.json();
 
     if (!response.ok) {

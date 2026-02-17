@@ -1,4 +1,6 @@
 // Netlify serverless function — proxies Gemini API calls so the key stays server-side.
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: f }) => f(...args));
 
 const RESUME_CONTEXT = `
 Candidate Name: Anirudh BK
@@ -50,16 +52,30 @@ If the answer isn't in the context, say you don't have that specific info but ca
 CONTEXT:
 ${RESUME_CONTEXT}`;
 
+const HEADERS = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
 exports.handler = async (event) => {
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 204, headers: HEADERS, body: '' };
+  }
+
   // Only allow POST
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
+    console.error('GEMINI_API_KEY is not set in environment variables');
     return {
       statusCode: 500,
+      headers: HEADERS,
       body: JSON.stringify({ error: 'AI service not configured' }),
     };
   }
@@ -69,11 +85,11 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body);
     userQuery = body.query;
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
 
   if (!userQuery || typeof userQuery !== 'string') {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Missing query' }) };
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Missing query' }) };
   }
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
@@ -99,6 +115,7 @@ exports.handler = async (event) => {
       console.error('Gemini API error:', response.status, errorText);
       return {
         statusCode: 502,
+        headers: HEADERS,
         body: JSON.stringify({ error: 'AI service temporarily unavailable' }),
       };
     }
@@ -109,19 +126,21 @@ exports.handler = async (event) => {
     if (!text) {
       return {
         statusCode: 502,
+        headers: HEADERS,
         body: JSON.stringify({ error: 'No response from AI' }),
       };
     }
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: HEADERS,
       body: JSON.stringify({ reply: text }),
     };
   } catch (err) {
     console.error('Function error:', err);
     return {
       statusCode: 500,
+      headers: HEADERS,
       body: JSON.stringify({ error: 'Internal server error' }),
     };
   }
